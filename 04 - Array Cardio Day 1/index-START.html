@@ -78,13 +78,47 @@
 
 		// 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
 		// https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+		function boulevards() {
+			//gottta use the command console in wikipedia for this
+			var boulevards_div = document.querySelector(".mw-category");
+			var links = Array.from(boulevards_div.querySelectorAll("a"));
+			var listOfNames = links.map((street) => {
+				const href = street.getAttribute("href");
+				return href.replace("/wiki/", "");
+			});
+		const out = listOfNames.filter((street) => street.includes("de"));
+		console.table(out);
+	}
 
-		// 7. sort Exercise
-		// Sort the people alphabetically by last name
+	// 7. sort Exercise
+	// Sort the people alphabetically by last name
+	function sortLastName() {
+		const out = people.sort((a, b) => {
+			aLast = a.slice(0, a.indexOf(','));
+			bLast = b.slice(0, b.indexOf(','));
+			aLast = aLast.toLowerCase();
+			bLast = bLast.toLowerCase();
+			return aLast - bLast;
+		});
+	console.table(out);
 
-		// 8. Reduce Exercise
-		// Sum up the instances of each of these
-		const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck'];
+}
+
+// 8. Reduce Exercise
+// Sum up the instances of each of these
+const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck'];
+function vehicleSum() {
+	const out = data.reduce((obj, vehicle) => {
+		if (!obj[vehicle]) {
+			obj[vehicle] = 0;
+		}
+		obj[vehicle]++;
+		return obj;
+
+	}
+	, {});
+console.log(out)
+}
 		</script>
 	</body>
 </html>
